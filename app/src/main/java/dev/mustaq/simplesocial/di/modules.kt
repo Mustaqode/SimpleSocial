@@ -1,6 +1,8 @@
 package dev.mustaq.simplesocial.di
 
+import dev.mustaq.simplesocial.ui.favourites.FavouritesViewModel
 import dev.mustaq.simplesocial.ui.main.MainViewModel
+import dev.mustaq.simplesocial.ui.post.PostViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -13,6 +15,8 @@ object AppModules {
 
     private val viewModelModules = module {
         viewModel { MainViewModel() }
+        viewModel { PostViewModel() }
+        viewModel { FavouritesViewModel() }
     }
 
     private val repoModules = module {
