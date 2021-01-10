@@ -19,7 +19,7 @@ class MainViewPagerAdapter(supportFragmentManager: FragmentManager) :
 
     override fun getItem(position: Int): Fragment = fragmentList[position]
 
-    fun addFragment(fragments: ArrayList<Fragment>, titles: ArrayList<String>){
+    fun addFragments(fragments: ArrayList<Fragment>, titles: ArrayList<String>){
         fragmentList.addAll(fragments)
         fragmentTitleList.addAll(titles)
     }
