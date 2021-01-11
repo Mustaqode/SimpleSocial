@@ -20,7 +20,7 @@ class SplashViewModel : ViewModel() {
 
     init {
         viewModelScope.launch {
-            delay(1500)
+            delay(3000)
             navigationLd.value = NavigationModel(
                 MainActivity::class.java,
                 finishCurrent = true
