@@ -2,6 +2,7 @@ package dev.mustaq.simplesocial.helper
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 
 
@@ -14,4 +15,8 @@ fun <T> LiveData<T>.observeLiveData(lifecycleOwner: LifecycleOwner, function: (T
         if (it != null)
             function.invoke(it)
     })
+}
+
+fun MutableLiveData<*>.trigger() {
+    this.value = Trigger
 }

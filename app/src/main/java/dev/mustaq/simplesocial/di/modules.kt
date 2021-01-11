@@ -21,7 +21,7 @@ object AppModules {
 
     private val viewModelModules = module {
         viewModel { MainViewModel(get()) }
-        viewModel { PostViewModel() }
+        viewModel { PostViewModel(get()) }
         viewModel { FavouritesViewModel() }
     }
 
