@@ -9,6 +9,7 @@ import dev.mustaq.simplesocial.repository.PostRepository
 import dev.mustaq.simplesocial.ui.favourites.FavouritesViewModel
 import dev.mustaq.simplesocial.ui.main.MainViewModel
 import dev.mustaq.simplesocial.ui.post.PostViewModel
+import dev.mustaq.simplesocial.ui.splash.SplashViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -21,6 +22,7 @@ Created by Mustaq Sameer on 10/1/21
 object AppModules {
 
     private val viewModelModules = module {
+        viewModel { SplashViewModel() }
         viewModel { MainViewModel(get()) }
         viewModel { PostViewModel(get()) }
         viewModel { FavouritesViewModel(get()) }
