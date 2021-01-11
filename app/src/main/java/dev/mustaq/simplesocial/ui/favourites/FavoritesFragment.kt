@@ -46,10 +46,11 @@ class FavoritesFragment : Fragment() {
 
     private fun setupUi() {
         setupRecyclerview()
-        favouritesViewModel.navigation.observeLiveData(viewLifecycleOwner) { startActivity(it)}
+        favouritesViewModel.navigation.observeLiveData(viewLifecycleOwner) { startActivity(it) }
         favouritesViewModel.loader.observeLiveData(viewLifecycleOwner, ::handleLoaderVisibility)
         favouritesViewModel.noPost.observeLiveData(viewLifecycleOwner, ::handleNoPostUi)
         favouritesViewModel.allPosts.observeLiveData(viewLifecycleOwner, ::updateList)
+        favouritesViewModel.removeFavourite.observeLiveData(viewLifecycleOwner, ::removeFavFromList)
     }
 
     private fun setupRecyclerview() {
@@ -71,8 +72,12 @@ class FavoritesFragment : Fragment() {
         uiTvNoPosts.visibility = View.VISIBLE
     }
 
-    private fun updateList(posts: ArrayList<PostDataModel>){
+    private fun updateList(posts: ArrayList<PostDataModel>) {
         postsAdapter.updateList(posts)
+    }
+
+    private fun removeFavFromList(position: Int) {
+        postsAdapter.removeAt(position)
     }
 
     private fun handleLoaderVisibility(isLoading: Boolean) {

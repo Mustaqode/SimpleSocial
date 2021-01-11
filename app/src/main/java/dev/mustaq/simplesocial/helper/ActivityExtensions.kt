@@ -48,3 +48,7 @@ fun Fragment.showError(text: String) {
     Toast.makeText(this.requireContext(), text, Toast.LENGTH_SHORT).show()
 }
 
+fun Activity.showError(text: String) {
+    Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+}
+

@@ -1,6 +1,5 @@
 package dev.mustaq.simplesocial.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,6 +50,14 @@ class PostsAdapter(
         postsData.addAll(comments)
         submitList(postsData)
         notifyDataSetChanged()
+    }
+
+    fun removeAt(position: Int){
+        if (position in postsData.indices) {
+            postsData.removeAt(position)
+            updateList(postsData)
+            notifyItemRemoved(position)
+        }
     }
 
     inner class PostsViewHolder(view: View) : RecyclerView.ViewHolder(view) {

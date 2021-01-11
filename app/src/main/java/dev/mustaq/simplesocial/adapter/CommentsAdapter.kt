@@ -1,6 +1,5 @@
 package dev.mustaq.simplesocial.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,9 +16,7 @@ import kotlinx.android.synthetic.main.model_comments.view.*
 Created by Mustaq Sameer on 11/1/21
  **/
 
-class CommentsAdapter(
-    private val context: Context,
-) : ListAdapter<CommentsDataModel, CommentsAdapter.CommentsViewHolder>(object :
+class CommentsAdapter() : ListAdapter<CommentsDataModel, CommentsAdapter.CommentsViewHolder>(object :
     DiffUtil.ItemCallback<CommentsDataModel>() {
     override fun areItemsTheSame(oldItem: CommentsDataModel, newItem: CommentsDataModel): Boolean =
         oldItem.postId == newItem.postId
