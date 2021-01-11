@@ -11,9 +11,10 @@ Created by Mustaq Sameer on 10/1/21
 
 @Entity(tableName = "posts")
 data class PostEntity(
+    @ColumnInfo(name = "id")
     @PrimaryKey
     val id: Int,
 
-    @ColumnInfo(name = "title") var title: String,
-    @ColumnInfo(name = "body") var body: String,
+    @ColumnInfo(name = "title") val title: String?,
+    @ColumnInfo(name = "body") val body: String?
 )

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import dev.mustaq.simplesocial.db.AppDb
 import dev.mustaq.simplesocial.repository.MiscRepository
+import dev.mustaq.simplesocial.repository.PostRepository
 import dev.mustaq.simplesocial.ui.favourites.FavouritesViewModel
 import dev.mustaq.simplesocial.ui.main.MainViewModel
 import dev.mustaq.simplesocial.ui.post.PostViewModel
@@ -26,6 +27,7 @@ object AppModules {
 
     private val repoModules = module {
         single { MiscRepository() }
+        single { PostRepository(get()) }
     }
 
     private val commonModules = module {

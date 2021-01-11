@@ -22,4 +22,5 @@ class MainViewModel(private val miscRepository: MiscRepository) : ViewModel() {
     init {
         fragmentsListLD.value = miscRepository.getListOfFragments()
     }
+
 }

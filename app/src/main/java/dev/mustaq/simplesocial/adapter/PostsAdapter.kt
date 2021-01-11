@@ -21,7 +21,7 @@ class PostsAdapter(
     private val context: Context,
     private val onPostClick: (PostDataModel) -> Unit,
     private val isFavourite: Boolean = false,
-    private val onFavouriteRemoveButtonClick: ((Int) -> Unit)? = null
+    private val onFavouriteRemoveButtonClick: ((Int, Int) -> Unit)? = null
 ) : ListAdapter<PostDataModel, PostsAdapter.PostsViewHolder>(object :
     DiffUtil.ItemCallback<PostDataModel>() {
     override fun areItemsTheSame(oldItem: PostDataModel, newItem: PostDataModel): Boolean =
@@ -65,7 +65,7 @@ class PostsAdapter(
             }
 
             removeFromFavouriteButton.setOnClickListener {
-                onFavouriteRemoveButtonClick?.invoke(currentList[adapterPosition].id)
+                onFavouriteRemoveButtonClick?.invoke(currentList[adapterPosition].id, adapterPosition)
             }
         }
     }

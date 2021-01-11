@@ -17,7 +17,7 @@ interface ServiceApi {
     suspend fun getAllPosts() : Response<PostModel>
 
     @GET("posts/{postId}/comments")
-    suspend fun getCommentsOfThePost(@Path(value = "postId") postId: String) : Response<CommentsModel>
+    suspend fun getCommentsOfThePost(@Path(value = "postId") postId: Int) : Response<CommentsModel>
 
 }
 

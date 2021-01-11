@@ -16,9 +16,9 @@ interface PostDao {
     @Query("SELECT * FROM posts")
     suspend fun getAll() : List<PostEntity>
 
-    @Insert
-    suspend fun savePostToDb(vararg post: PostEntity)
-
-    @Query("SELECT * FROM posts WHERE id = :id")
-    suspend fun deletePostFromDb(id: Int)
+//    @Insert
+//    suspend fun savePostToDb(vararg post: PostEntity)
+//
+//    @Query("SELECT * FROM posts WHERE id = :id")
+//    suspend fun deletePostFromDb(id: Int)
 }
