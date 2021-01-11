@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/uiCvPost"
@@ -23,18 +24,29 @@
                 android:id="@+id/uiTvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/grey_light"
                 android:paddingStart="12dp"
-                android:paddingEnd="12dp"
                 android:paddingTop="8dp"
+                android:paddingEnd="12dp"
                 android:textAlignment="viewStart"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:background="@color/grey_light"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/uiIvRemove"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Indian Democracy - A Revision" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/uiIvRemove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_close"
+                app:layout_constraintBottom_toBottomOf="@id/uiTvTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/uiTvTitle" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/uiTvBody"

@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -17,10 +18,12 @@ import kotlinx.android.synthetic.main.model_posts.view.*
 Created by Mustaq Sameer on 11/1/21
  **/
 class PostsAdapter(
-    val context: Context,
-    val onPostClick: (PostDataModel) -> Unit
-) : ListAdapter<PostDataModel, PostsAdapter.PostsViewHolder>( object :
-DiffUtil.ItemCallback<PostDataModel>(){
+    private val context: Context,
+    private val onPostClick: (PostDataModel) -> Unit,
+    private val isFavourite: Boolean = false,
+    private val onFavouriteRemoveButtonClick: ((Int) -> Unit)? = null
+) : ListAdapter<PostDataModel, PostsAdapter.PostsViewHolder>(object :
+    DiffUtil.ItemCallback<PostDataModel>() {
     override fun areItemsTheSame(oldItem: PostDataModel, newItem: PostDataModel): Boolean =
         oldItem.id == newItem.id
 
@@ -29,7 +32,7 @@ DiffUtil.ItemCallback<PostDataModel>(){
 }
 ) {
 
-    private val postsData : ArrayList<PostDataModel> = ArrayList()
+    private val postsData: ArrayList<PostDataModel> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostsViewHolder =
         PostsViewHolder(
@@ -41,6 +44,7 @@ DiffUtil.ItemCallback<PostDataModel>(){
         val currentItem = currentList[position]
         holder.title.text = currentItem.title
         holder.post.text = currentItem.body
+        holder.removeFromFavouriteButton.visibility = if (isFavourite) View.VISIBLE else View.GONE
     }
 
     fun updateList(comments: ArrayList<PostDataModel>) {
@@ -51,12 +55,17 @@ DiffUtil.ItemCallback<PostDataModel>(){
     }
 
     inner class PostsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val title : AppCompatTextView = view.uiTvTitle
-        val post : AppCompatTextView = view.uiTvBody
+        val title: AppCompatTextView = view.uiTvTitle
+        val post: AppCompatTextView = view.uiTvBody
+        val removeFromFavouriteButton: AppCompatImageView = view.uiIvRemove
 
         init {
             view.setOnClickListener {
                 onPostClick.invoke(currentList[adapterPosition])
+            }
+
+            removeFromFavouriteButton.setOnClickListener {
+                onFavouriteRemoveButtonClick?.invoke(currentList[adapterPosition].id)
             }
         }
     }

@@ -19,6 +19,6 @@ interface PostDao {
     @Insert
     suspend fun savePostToDb(vararg post: PostEntity)
 
-    @Delete
-    suspend fun deletePostFromDb(post: PostEntity)
+    @Query("SELECT * FROM posts WHERE id = :id")
+    suspend fun deletePostFromDb(id: Int)
 }

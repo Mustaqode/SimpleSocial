@@ -18,7 +18,7 @@ Created by Mustaq Sameer on 11/1/21
  **/
 
 class CommentsAdapter(
-    val context: Context,
+    private val context: Context,
 ) : ListAdapter<CommentsDataModel, CommentsAdapter.CommentsViewHolder>(object :
     DiffUtil.ItemCallback<CommentsDataModel>() {
     override fun areItemsTheSame(oldItem: CommentsDataModel, newItem: CommentsDataModel): Boolean =
