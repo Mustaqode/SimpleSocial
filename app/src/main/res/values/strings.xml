@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SimpleSocial</string>
     <string name="str_app_title">Simple Social</string>
+    <string name="str_no_posts_in_favourites">No Posts in Favourites</string>
 </resources>

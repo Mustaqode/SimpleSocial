@@ -3,6 +3,7 @@ package dev.mustaq.simplesocial.repository
 import dev.mustaq.simplesocial.db.AppDb
 import dev.mustaq.simplesocial.mapper.CommentsDataMapper
 import dev.mustaq.simplesocial.mapper.PostDataMapper
+import dev.mustaq.simplesocial.mapper.mapToPostDataModel
 import dev.mustaq.simplesocial.mapper.mapToPostEntity
 import dev.mustaq.simplesocial.model.CommentsDataModel
 import dev.mustaq.simplesocial.model.PostDataModel
@@ -25,6 +26,15 @@ class PostRepository(private val serviceApi: ServiceApi, private val db: AppDb) 
 
     suspend fun addPostToFavourites(postDataModel: PostDataModel)  {
         db.postDao().savePostToDb(postDataModel.mapToPostEntity())
+    }
+
+    suspend fun getAllPostsFromDb(): ArrayList<PostDataModel> =
+        db.postDao().getAll().map {
+            it.mapToPostDataModel()
+        }.toCollection(ArrayList())
+
+    suspend fun deletePostFromDb(postDataModel: PostDataModel) {
+        db.postDao().deletePostFromDb(postDataModel.mapToPostEntity())
     }
 
 }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import dev.mustaq.simplesocial.R
 import dev.mustaq.simplesocial.adapter.PostsAdapter
 import dev.mustaq.simplesocial.helper.observeLiveData
@@ -21,9 +22,7 @@ class PostFragment : Fragment() {
 
     private val postsAdapter by lazy {
         PostsAdapter(
-            requireContext(),
-            ::onPostClicked,
-            onFavouriteRemoveButtonClick = ::onFavouriteRemoveButtonClicked
+            ::onPostClicked
         )
     }
     private val postViewModel: PostViewModel by viewModel()
@@ -40,18 +39,22 @@ class PostFragment : Fragment() {
     }
 
     private fun setupUi() {
+        setupRecyclerview()
         postViewModel.error.observeLiveData(viewLifecycleOwner) { showError(it) }
         postViewModel.navigation.observeLiveData(viewLifecycleOwner) { startActivity(it) }
         postViewModel.loader.observeLiveData(viewLifecycleOwner, ::handleLoaderVisibility)
         postViewModel.allPosts.observeLiveData(viewLifecycleOwner, ::updateList)
     }
 
-    private fun onPostClicked(postDataModel: PostDataModel) {
-        postViewModel.showComments(postDataModel)
+    private fun setupRecyclerview() {
+        uiRvPosts.apply {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = postsAdapter
+        }
     }
 
-    private fun onFavouriteRemoveButtonClicked(id: Int, position: Int) {
-        postViewModel.removeFromFavourites(id, position)
+    private fun onPostClicked(postDataModel: PostDataModel) {
+        postViewModel.showComments(postDataModel)
     }
 
     private fun handleLoaderVisibility(isLoading: Boolean) {

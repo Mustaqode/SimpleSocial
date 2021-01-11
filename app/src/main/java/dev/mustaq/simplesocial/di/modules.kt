@@ -3,6 +3,7 @@ package dev.mustaq.simplesocial.di
 import android.content.Context
 import androidx.room.Room
 import dev.mustaq.simplesocial.db.AppDb
+import dev.mustaq.simplesocial.network.ApiProvider
 import dev.mustaq.simplesocial.repository.MiscRepository
 import dev.mustaq.simplesocial.repository.PostRepository
 import dev.mustaq.simplesocial.ui.favourites.FavouritesViewModel
@@ -22,7 +23,7 @@ object AppModules {
     private val viewModelModules = module {
         viewModel { MainViewModel(get()) }
         viewModel { PostViewModel(get()) }
-        viewModel { FavouritesViewModel() }
+        viewModel { FavouritesViewModel(get()) }
     }
 
     private val repoModules = module {
@@ -32,6 +33,7 @@ object AppModules {
 
     private val commonModules = module {
         single { getDatabase(androidContext()) }
+        single { ApiProvider.client }
     }
 
     fun appModules() = viewModelModules + repoModules + commonModules
