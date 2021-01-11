@@ -6,7 +6,7 @@ Created by Mustaq Sameer on 10/1/21
  **/
 
 data class CommentsModel(
-    val commentsDataModel: ArrayList<CommentsDataModel>
+    val commentsData: ArrayList<CommentsDataModel>
 )
 
 data class CommentsDataModel(

@@ -27,7 +27,7 @@ object AppModules {
 
     private val repoModules = module {
         single { MiscRepository() }
-        single { PostRepository(get()) }
+        single { PostRepository(get(), get()) }
     }
 
     private val commonModules = module {
