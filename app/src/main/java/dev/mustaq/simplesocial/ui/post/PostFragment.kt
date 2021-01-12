@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dev.mustaq.simplesocial.R
 import dev.mustaq.simplesocial.adapter.PostsAdapter
 import dev.mustaq.simplesocial.helper.observeLiveData
-import dev.mustaq.simplesocial.helper.showError
+import dev.mustaq.simplesocial.helper.showToast
 import dev.mustaq.simplesocial.helper.startActivity
 import dev.mustaq.simplesocial.model.PostDataModel
 import kotlinx.android.synthetic.main.fragment_posts.*
@@ -40,7 +40,7 @@ class PostFragment : Fragment() {
 
     private fun setupUi() {
         setupRecyclerview()
-        postViewModel.error.observeLiveData(viewLifecycleOwner) { showError(it) }
+        postViewModel.error.observeLiveData(viewLifecycleOwner) { showToast(it) }
         postViewModel.navigation.observeLiveData(viewLifecycleOwner) { startActivity(it) }
         postViewModel.loader.observeLiveData(viewLifecycleOwner, ::handleLoaderVisibility)
         postViewModel.allPosts.observeLiveData(viewLifecycleOwner, ::updateList)

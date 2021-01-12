@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dev.mustaq.simplesocial.R
 import dev.mustaq.simplesocial.adapter.CommentsAdapter
 import dev.mustaq.simplesocial.helper.observeLiveData
-import dev.mustaq.simplesocial.helper.showError
+import dev.mustaq.simplesocial.helper.showToast
 import dev.mustaq.simplesocial.model.CommentsDataModel
 import kotlinx.android.synthetic.main.activity_comments.*
 import kotlinx.android.synthetic.main.activity_comments.uiAnimationLoader
@@ -32,7 +32,7 @@ class CommentsActivity : AppCompatActivity() {
 
     private fun setupUi() {
         setupRecyclerView()
-        commentsViewModel.error.observeLiveData(this) { showError(it) }
+        commentsViewModel.error.observeLiveData(this) { showToast(it) }
         commentsViewModel.loader.observeLiveData(this, ::handleLoaderVisibility)
         commentsViewModel.allComments.observeLiveData(this, ::updateList)
         commentsViewModel.addOrRemoveFavourites.observeLiveData(this, ::handleFavButton)

@@ -44,11 +44,13 @@ fun Fragment.startActivity(navigationModel: NavigationModel) {
         requireActivity().finish()
 }
 
-fun Fragment.showError(text: String) {
+fun Fragment.showToast(text: String) {
     Toast.makeText(this.requireContext(), text, Toast.LENGTH_SHORT).show()
 }
 
-fun Activity.showError(text: String) {
+fun Activity.showToast(text: String) {
     Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
 }
+
+
 

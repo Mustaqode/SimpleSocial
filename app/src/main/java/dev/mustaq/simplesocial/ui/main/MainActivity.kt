@@ -1,14 +1,19 @@
 package dev.mustaq.simplesocial.ui.main
 
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import dev.mustaq.simplesocial.R
 import dev.mustaq.simplesocial.adapter.MainViewPagerAdapter
 import dev.mustaq.simplesocial.helper.observeLiveData
+import dev.mustaq.simplesocial.helper.showToast
+import dev.mustaq.simplesocial.reciever.ConnectivityBroadcast
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+@Suppress("DEPRECATION")
+class MainActivity : AppCompatActivity(), ConnectivityBroadcast.ConnectivityReceiverListener {
 
     private val mainViewModel: MainViewModel by viewModel()
 
@@ -16,15 +21,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupUi()
-        setListeners()
+        registerReceiver(ConnectivityBroadcast(), IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ConnectivityBroadcast.connectivityReceiverListener = this
     }
 
     private fun setupUi() {
         mainViewModel.fragmentsList.observeLiveData(this, ::setupViewPager)
-    }
-
-    private fun setListeners() {
-
+        mainViewModel.internetMessage.observeLiveData(this) { showToast(it) }
     }
 
     private fun setupViewPager(fragmentData: fragmentData) {
@@ -32,5 +39,9 @@ class MainActivity : AppCompatActivity() {
         adapter.addFragments(fragmentData.first, fragmentData.second)
         uiViewPager.adapter = adapter
         uiTabs.setupWithViewPager(uiViewPager)
+    }
+
+    override fun onNetworkConnectionChanged(isConnected: Boolean) {
+        mainViewModel.handleInternetAvailability(isConnected)
     }
 }
