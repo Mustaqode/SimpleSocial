@@ -42,6 +42,7 @@ class FavoritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupUi()
+        setListeners()
     }
 
     private fun setupUi() {
@@ -51,6 +52,12 @@ class FavoritesFragment : Fragment() {
         favouritesViewModel.noPost.observeLiveData(viewLifecycleOwner, ::handleNoPostUi)
         favouritesViewModel.allPosts.observeLiveData(viewLifecycleOwner, ::updateList)
         favouritesViewModel.removeFavourite.observeLiveData(viewLifecycleOwner, ::removeFavFromList)
+    }
+
+    private fun setListeners() {
+        uiSwipeRefreshPage.setOnRefreshListener {
+            favouritesViewModel.refreshList()
+        }
     }
 
     private fun setupRecyclerview() {
@@ -82,6 +89,7 @@ class FavoritesFragment : Fragment() {
 
     private fun handleLoaderVisibility(isLoading: Boolean) {
         uiAnimationLoader.visibility = if (isLoading) View.VISIBLE else View.GONE
+        uiSwipeRefreshPage.isRefreshing = isLoading
     }
 
     companion object {
