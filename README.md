@@ -27,8 +27,12 @@ This is a simple social app which fetches post and comments from the server and 
 9) Kotlin extension functions for efficiency
 10) Kotlin sealed class
 
-#App Demo
+# App Demo
 
 [![Simple Social](http://img.youtube.com/vi/SYbjDJXNYy8/0.jpg)](http://www.youtube.com/watch?v=SYbjDJXNYy8 "A simple social app")
+
+# Apk
+
+https://github.com/Mustaqode/SimpleSocial/blob/main/Simple%20social%20v1.0.apk
 
 
