@@ -37,4 +37,7 @@ class PostRepository(private val serviceApi: ServiceApi, private val db: AppDb) 
         db.postDao().deletePostFromDb(postDataModel.mapToPostEntity())
     }
 
+    suspend fun checkWhetherThePostIsInDb(postDataModel: PostDataModel) =
+        db.postDao().checkWhetherTheObjectIsInDb(postDataModel.id)
+
 }

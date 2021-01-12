@@ -48,6 +48,11 @@ class CommentsViewModel(private val postRepository: PostRepository) : ViewModel(
         }
     }
 
+    val isFavourite = liveData {
+        postDataModel ?: return@liveData
+        emit(postRepository.checkWhetherThePostIsInDb(postDataModel!!))
+    }
+
     fun processIntent(intent: Intent?) {
         intent ?: return
         postDataModel = intent.getParcelableExtra(KEY_POST_DATA)

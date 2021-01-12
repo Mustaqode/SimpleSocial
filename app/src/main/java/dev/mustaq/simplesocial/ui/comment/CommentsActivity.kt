@@ -36,6 +36,7 @@ class CommentsActivity : AppCompatActivity() {
         commentsViewModel.loader.observeLiveData(this, ::handleLoaderVisibility)
         commentsViewModel.allComments.observeLiveData(this, ::updateList)
         commentsViewModel.addOrRemoveFavourites.observeLiveData(this, ::handleFavButton)
+        commentsViewModel.isFavourite.observeLiveData(this, ::handleFavButton)
     }
 
     private fun setListeners() {

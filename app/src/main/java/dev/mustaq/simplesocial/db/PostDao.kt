@@ -22,6 +22,7 @@ interface PostDao {
     @Delete
     suspend fun deletePostFromDb(post: PostEntity)
 
-//    @Query("SELECT * FROM posts WHERE id = :id")
-//    suspend fun deletePostFromDb(id: Int)
+    @Query("SELECT EXISTS (SELECT 1 FROM posts WHERE id = :id)")
+    suspend fun checkWhetherTheObjectIsInDb(id: Int) : Boolean
+
 }
