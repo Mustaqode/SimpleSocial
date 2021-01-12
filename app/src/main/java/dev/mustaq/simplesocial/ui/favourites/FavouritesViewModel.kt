@@ -33,8 +33,8 @@ class FavouritesViewModel(private val postRepository: PostRepository) : ViewMode
             postRepository.getAllPostsFromDb().apply {
                 emit(this)
             }.also {
+                loaderLd.value = false
                 it.ifEmpty {
-                    loaderLd.value = false
                     noPostLd.trigger()
                 }
             }

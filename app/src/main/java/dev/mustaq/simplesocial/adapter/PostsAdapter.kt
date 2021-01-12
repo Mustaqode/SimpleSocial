@@ -56,7 +56,6 @@ class PostsAdapter(
         if (position in postsData.indices) {
             postsData.removeAt(position)
             updateList(postsData)
-            notifyItemRemoved(position)
         }
     }
 

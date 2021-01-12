@@ -2,6 +2,7 @@ package dev.mustaq.simplesocial.ui.post
 
 import androidx.core.os.bundleOf
 import androidx.lifecycle.*
+import dev.mustaq.simplesocial.helper.SingleLiveData
 import dev.mustaq.simplesocial.model.NavigationModel
 import dev.mustaq.simplesocial.model.PostDataModel
 import dev.mustaq.simplesocial.reponsehandler.CustomResponse
@@ -15,7 +16,7 @@ Created by Mustaq Sameer on 10/1/21
 class PostViewModel(private val postRepository: PostRepository) : ViewModel() {
 
     private val errorLd = MutableLiveData<String>()
-    private val navigationLd = MutableLiveData<NavigationModel>()
+    private val navigationLd = SingleLiveData<NavigationModel>()
     private val loaderLd = MutableLiveData<Boolean>()
 
     val error: LiveData<String> = errorLd
