@@ -18,8 +18,7 @@ Created by Mustaq Sameer on 10/1/21
 class FavouritesViewModel(private val postRepository: PostRepository) : ViewModel() {
 
     private val allPostsLd = MutableLiveData<Trigger>()
-    private val noPostLd = MutableLiveData<Trigger>()
-    private val removeFavouriteLd = MutableLiveData<Pair<PostDataModel, Int>>()
+    private val removeFavouriteLd = MutableLiveData<PostDataModel>()
     private val navigationLd = SingleLiveData<NavigationModel>()
     private val loaderLd = MutableLiveData<Boolean>()
 
@@ -27,7 +26,6 @@ class FavouritesViewModel(private val postRepository: PostRepository) : ViewMode
         allPostsLd.trigger()
     }
 
-    val noPost: LiveData<Trigger> = noPostLd
     val navigation: LiveData<NavigationModel> = navigationLd
     val loader: LiveData<Boolean> = loaderLd
 
@@ -38,17 +36,15 @@ class FavouritesViewModel(private val postRepository: PostRepository) : ViewMode
                 emit(this)
             }.also {
                 loaderLd.value = false
-                it.ifEmpty {
-                    noPostLd.trigger()
-                }
             }
         }
     }
 
-    val removeFavourite = removeFavouriteLd.switchMap { (post, position) ->
+    val removeFavourite = removeFavouriteLd.switchMap { post ->
         liveData {
             postRepository.deletePostFromDb(post)
-            emit(position)
+            emit(Trigger)
+            allPostsLd.trigger()
         }
     }
 
@@ -59,8 +55,8 @@ class FavouritesViewModel(private val postRepository: PostRepository) : ViewMode
         )
     }
 
-    fun removeFromFavourites(post: PostDataModel, position: Int) {
-        removeFavouriteLd.value = post to position
+    fun removeFromFavourites(post: PostDataModel) {
+        removeFavouriteLd.value = post
     }
 
     fun refreshList() {

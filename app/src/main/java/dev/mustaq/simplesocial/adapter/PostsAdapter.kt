@@ -19,7 +19,7 @@ Created by Mustaq Sameer on 11/1/21
 class PostsAdapter(
     private val onPostClick: (PostDataModel) -> Unit,
     private val isFavourite: Boolean = false,
-    private val onFavouriteRemoveButtonClick: ((PostDataModel, Int) -> Unit)? = null
+    private val onFavouriteRemoveButtonClick: ((PostDataModel) -> Unit)? = null
 ) : ListAdapter<PostDataModel, PostsAdapter.PostsViewHolder>(object :
     DiffUtil.ItemCallback<PostDataModel>() {
     override fun areItemsTheSame(oldItem: PostDataModel, newItem: PostDataModel): Boolean =
@@ -52,13 +52,6 @@ class PostsAdapter(
         notifyDataSetChanged()
     }
 
-    fun removeAt(position: Int){
-        if (position in postsData.indices) {
-            postsData.removeAt(position)
-            updateList(postsData)
-        }
-    }
-
     inner class PostsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: AppCompatTextView = view.uiTvTitle
         val post: AppCompatTextView = view.uiTvBody
@@ -70,7 +63,7 @@ class PostsAdapter(
             }
 
             removeFromFavouriteButton.setOnClickListener {
-                onFavouriteRemoveButtonClick?.invoke(currentList[adapterPosition], adapterPosition)
+                onFavouriteRemoveButtonClick?.invoke(currentList[adapterPosition])
             }
         }
     }
