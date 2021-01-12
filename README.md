@@ -31,7 +31,7 @@ This is a simple social app which fetches post and comments from the server and 
 
 [![Simple Social](http://img.youtube.com/vi/SYbjDJXNYy8/0.jpg)](http://www.youtube.com/watch?v=SYbjDJXNYy8 "A simple social app")
 
-# Apk
+# Apk (Signed)
 
 https://github.com/Mustaqode/SimpleSocial/blob/main/Simple%20social%20v1.0.apk
 
