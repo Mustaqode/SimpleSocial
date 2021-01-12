@@ -25,7 +25,7 @@ object AppModules {
 
     private val viewModelModules = module {
         viewModel { SplashViewModel() }
-        viewModel { MainViewModel(get()) }
+        viewModel { MainViewModel(get(), get()) }
         viewModel { PostViewModel(get()) }
         viewModel { FavouritesViewModel(get()) }
         viewModel { CommentsViewModel(get()) }
